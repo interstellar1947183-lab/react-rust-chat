@@ -28,9 +28,11 @@ struct Msg {
 
 #[tokio::main]
 async fn main() {
-    let port = std::env::var("PORT").unwrap_or_else(|_| "10000".to_string());
+   // Your code:
+let port = std::env::var("PORT").unwrap_or_else(|_| "10000".to_string());
+let addr = format!("0.0.0.0:{}", port);
 
-    let addr = format!("0.0.0.0:{}", port);
+
 
     let static_folder = PathBuf::from("static");
 
