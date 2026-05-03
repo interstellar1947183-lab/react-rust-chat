@@ -1,0 +1,26 @@
+name: Deploy Frontend
+on:
+  push:
+    branches: [main] # Runs every time you push to main
+
+permissions:
+  contents: write # Allows the robot to save the build results
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@v4
+
+      - name: Install and Build 🔧
+        run: |
+          cd wschat-react-rust
+          npm install
+          npm run build
+
+      - name: Deploy 
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: wschat-react-rust/dist # Vite puts the "website" files here
+          branch: gh-pages # The robot will create this branch for the website
