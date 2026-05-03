@@ -15,7 +15,7 @@ function App() {
   useEffect(() => {
     // Initialize WebSocket
     
-   const ws = new WebSocket('wss://react-rust-chat-app.onrender.com.com');
+   const ws = new WebSocket('wss://react-rust-chat-app.onrender.com');
     socketRef.current = ws;
 
     ws.onopen = () => console.log("Connected to Rustcord");
