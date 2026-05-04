@@ -18,7 +18,17 @@ function App() {
    const ws = new WebSocket('wss://react-rust-chat-app.onrender.com/ws');
     socketRef.current = ws;
 
-    ws.onopen = () => console.log("Connected to Rustcord");
+    const timer = setTimeout(() => {
+  if (socketRef.current.readyState !== WebSocket.OPEN) {
+    console.warn("Taking too long... Render might be sleeping");
+    // You could update a piece of State here to show a "Loading..." spinner to the user
+  }
+}, 3000);
+
+    ws.onopen = () => {
+      clearTimeout(timer);
+      console.log("Connected to Rustcord");
+    }
     
     ws.onmessage = (ev) => {
       const data = JSON.parse(ev.data);
